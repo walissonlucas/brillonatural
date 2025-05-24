@@ -1,0 +1,95 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/hero-banner.jpg",
+        "title": "Despierta tu brillo natural",
+        "subtitle": "Cuida tu piel con amor",
+        "description": "Productos de belleza con ingredientes naturales para realzar tu belleza única y auténtica.",
+        "button_label": "Explorar productos",
+        "button_link": "\/collections\/all",
+        "secondary_button_label": "Conocer más",
+        "secondary_button_link": "\/pages\/about"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Productos Destacados",
+        "collection": "featured",
+        "products_to_show": 4,
+        "show_view_all": true
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "category_1": {
+          "type": "collection",
+          "settings": {
+            "collection": "serums",
+            "title": "Sérums Faciales"
+          }
+        },
+        "category_2": {
+          "type": "collection",
+          "settings": {
+            "collection": "moisturizers",
+            "title": "Hidratantes"
+          }
+        },
+        "category_3": {
+          "type": "collection",
+          "settings": {
+            "collection": "cleansers",
+            "title": "Limpiadores"
+          }
+        },
+        "category_4": {
+          "type": "collection",
+          "settings": {
+            "collection": "kits",
+            "title": "Kits Glow"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4"
+      ]
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {
+        "title": "¿Por qué elegirnos?",
+        "subtitle": "Descubre los beneficios que han conquistado a miles de mujeres"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "title": "Lo que dicen nuestras clientas",
+        "autoplay": true,
+        "autoplay_speed": 5000
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "title": "Únete a nuestra comunidad",
+        "subtitle": "Suscríbete para recibir consejos de belleza, ofertas exclusivas y novedades"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured_collection",
+    "categories",
+    "benefits",
+    "testimonials",
+    "newsletter"
+  ]
+}
