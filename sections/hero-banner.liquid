@@ -1,0 +1,95 @@
+{% if section.settings.image != blank %}
+  <section class="relative h-screen flex items-center">
+    <div class="absolute inset-0 z-0">
+      {{ section.settings.image | image_url: width: 2000 | image_tag:
+        class: "w-full h-full object-cover object-center",
+        loading: "eager",
+        preload: true
+      }}
+      <div class="absolute inset-0 bg-gradient-to-r from-white/80 to-white/30"></div>
+    </div>
+    
+    <div class="container-custom relative z-10">
+      <div class="max-w-xl fade-in">
+        <h1 class="font-poppins font-bold text-3xl md:text-4xl lg:text-5xl text-dark leading-tight mb-4">
+          {{ section.settings.title }}
+          <span class="block">{{ section.settings.subtitle }}</span>
+        </h1>
+        <p class="text-dark-light text-lg mb-8 md:pr-12">
+          {{ section.settings.description }}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          {% if section.settings.button_label != blank %}
+            <a href="{{ section.settings.button_link }}" class="btn-primary">
+              {{ section.settings.button_label }}
+            </a>
+          {% endif %}
+          {% if section.settings.secondary_button_label != blank %}
+            <a href="{{ section.settings.secondary_button_link }}" class="btn-secondary">
+              {{ section.settings.secondary_button_label }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Despierta tu brillo natural"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Cuida tu piel con amor"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Productos de belleza con ingredientes naturales para realzar tu belleza única y auténtica."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Explorar productos"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary Button Label",
+      "default": "Conocer más"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}
