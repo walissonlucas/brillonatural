@@ -1,0 +1,127 @@
+{% assign main_menu = linklists[section.settings.menu].links %}
+
+<header class="fixed w-full top-0 z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent{% else %}bg-white shadow-md{% endif %}" data-header>
+  <div class="container-custom">
+    <div class="flex items-center justify-between py-4">
+      {%- if request.page_type == 'index' -%}
+        <h1 class="text-2xl font-poppins font-semibold">
+      {%- endif -%}
+        <a href="{{ routes.root_url }}" class="text-dark hover:text-accent-dark transition-colors">
+          {%- if section.settings.logo != blank -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {{ section.settings.logo | image_url: width: section.settings.logo_width | image_tag:
+              class: 'h-auto',
+              widths: '50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800',
+              height: section.settings.logo.height,
+              width: section.settings.logo.width,
+              alt: logo_alt
+            }}
+          {%- else -%}
+            {{ shop.name }}
+          {%- endif -%}
+        </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {%- endif -%}
+
+      <nav class="hidden md:flex items-center space-x-8">
+        {%- for link in main_menu -%}
+          <a href="{{ link.url }}" class="text-sm font-medium hover:text-accent-dark transition-colors {% if link.active %}text-accent-dark{% else %}text-dark{% endif %}">
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button class="text-dark hover:text-accent-dark transition-colors" aria-label="{{ 'general.search.search' | t }}">
+          {% render 'icon-search' %}
+        </button>
+        
+        <a href="{{ routes.account_url }}" class="text-dark hover:text-accent-dark transition-colors" aria-label="{{ 'customer.account_fallback' | t }}">
+          {% render 'icon-account' %}
+        </a>
+        
+        <a href="{{ routes.cart_url }}" class="text-dark hover:text-accent-dark transition-colors relative" aria-label="{{ 'sections.header.cart' | t }}">
+          {% render 'icon-cart' %}
+          {%- if cart.item_count > 0 -%}
+            <span class="absolute -top-1 -right-1 bg-accent-dark text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              {{- cart.item_count -}}
+            </span>
+          {%- endif -%}
+        </a>
+        
+        <button class="md:hidden text-dark" type="button" aria-label="{{ 'sections.header.menu' | t }}" aria-expanded="false" data-menu-toggle>
+          {% render 'icon-hamburger' %}
+          <span class="visually-hidden">{{ 'sections.header.menu' | t }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu hidden md:hidden bg-white shadow-md" data-menu>
+    <div class="container-custom py-4">
+      <nav class="flex flex-col space-y-4">
+        {%- for link in main_menu -%}
+          <a href="{{ link.url }}" class="text-sm font-medium py-2 {% if link.active %}text-accent-dark{% else %}text-dark{% endif %}">
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]');
+  const menuToggle = document.querySelector('[data-menu-toggle]');
+  const menu = document.querySelector('[data-menu]');
+
+  if (menuToggle && menu) {
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      menu.classList.toggle('hidden');
+    });
+  }
+
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.remove('bg-transparent');
+        header.classList.add('bg-white', 'shadow-md');
+      } else if (document.body.classList.contains('template-index')) {
+        header.classList.add('bg-transparent');
+        header.classList.remove('bg-white', 'shadow-md');
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "px",
+      "label": "Logo width"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}
