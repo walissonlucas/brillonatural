@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Open Sans', sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent text-black px-6 py-3 rounded-full font-medium transition-all duration-300 
+    hover:bg-accent/90 hover:shadow-md text-sm md:text-base;
+  }
+  
+  .btn-secondary {
+    @apply bg-primary text-black px-6 py-3 rounded-full 
+    font-medium transition-all duration-300 hover:bg-primary/90 hover:shadow-md hover:border-none text-sm md:text-base;
+  }
+  
+  .section-title {
+    @apply font-poppins font-semibold text-2xl md:text-3xl lg:text-4xl text-center mb-8 text-dark;
+  }
+  
+  .section-subtitle {
+    @apply font-poppins font-medium text-lg md:text-xl text-dark mb-12 text-center max-w-2xl mx-auto;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .product-card {
+    @apply bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  .benefit-card {
+    @apply flex flex-col items-center text-center p-4;
+  }
+}
+
+body {
+  @apply bg-background text-dark;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hover-grow {
+  transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+  transform: scale(1.03);
+}
